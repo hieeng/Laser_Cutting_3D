@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Player : CustomBehaviour
 {
+    [SerializeField] float _power = 0.01f;
+    [SerializeField] float _shootInterval = 0.1f;
+    [SerializeField] Transform _tower;
+    float _shootStart = 0;
+    float _rotY = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,11 +18,46 @@ public class Player : CustomBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Shoot();
     }
 
     public override void Init()
     {
-        
+
+    }
+
+    void Shoot()
+    {
+       
+        if (Input.GetMouseButton(0))
+        {
+            if (Time.time - _shootStart < _shootInterval) return;
+            RaycastHit hit;
+            Debug.DrawRay(transform.position, transform.forward * 100.0f, Color.red);
+            if (!Physics.Raycast(transform.position, transform.forward, out hit, 100.0f, LayerMask.GetMask("Tower")))
+                return;
+            //ChangeScale(hit);
+            Combine cb = hit.collider.gameObject.GetComponent<Combine>();
+            if (!cb.Bake()) return;
+            _rotY = 360.0f/101;
+            _tower.Rotate(0, _rotY, 0);
+            //cb.transform.Rotate(0, _rotY, 0);
+            _shootStart = Time.time;
+        }
+    }
+
+
+    void ChangeScale(RaycastHit hit)
+    {
+        Vector3 scale;
+        scale = hit.transform.lossyScale;
+        scale.x -= _power * Time.deltaTime;
+        scale.z -= _power * Time.deltaTime;
+        if(scale.x <= 0)
+        {
+            scale.x = 0;
+            scale.z = 0;
+        }
+        hit.transform.localScale = scale;
     }
 }
