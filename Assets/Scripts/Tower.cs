@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tower : MonoBehaviour
+public class Tower : CustomBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -12,6 +12,11 @@ public class Tower : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        
+    }
+
+    public override void Init()
     {
         
     }

@@ -483,7 +483,7 @@ GameObject:
   - component: {fileID: 97565889}
   - component: {fileID: 97565888}
   m_Layer: 0
-  m_Name: Cylinder (9)
+  m_Name: Cylinder 10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -690,7 +690,7 @@ GameObject:
   - component: {fileID: 220354489}
   - component: {fileID: 220354488}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: Cylinder 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1713,7 +1713,7 @@ GameObject:
   - component: {fileID: 708187574}
   - component: {fileID: 708187573}
   m_Layer: 0
-  m_Name: Cylinder (7)
+  m_Name: Cylinder 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2156,7 +2156,7 @@ GameObject:
   - component: {fileID: 887500301}
   - component: {fileID: 887500300}
   m_Layer: 0
-  m_Name: Cylinder (8)
+  m_Name: Cylinder 9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2527,7 +2527,7 @@ GameObject:
   - component: {fileID: 1197520721}
   - component: {fileID: 1197520720}
   m_Layer: 0
-  m_Name: Cylinder (5)
+  m_Name: Cylinder 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2739,7 +2739,7 @@ GameObject:
   - component: {fileID: 1337765020}
   - component: {fileID: 1337765019}
   m_Layer: 0
-  m_Name: Cylinder (3)
+  m_Name: Cylinder 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2976,7 +2976,7 @@ GameObject:
   - component: {fileID: 1573111437}
   - component: {fileID: 1573111436}
   m_Layer: 0
-  m_Name: Cylinder (4)
+  m_Name: Cylinder 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3240,7 +3240,7 @@ GameObject:
   - component: {fileID: 1822100914}
   - component: {fileID: 1822100913}
   m_Layer: 0
-  m_Name: Cylinder (6)
+  m_Name: Cylinder 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3337,7 +3337,7 @@ GameObject:
   - component: {fileID: 1842496404}
   - component: {fileID: 1842496403}
   m_Layer: 0
-  m_Name: Cylinder (1)
+  m_Name: Cylinder 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3513,7 +3513,7 @@ GameObject:
   - component: {fileID: 1864977244}
   - component: {fileID: 1864977243}
   m_Layer: 0
-  m_Name: Cylinder (2)
+  m_Name: Cylinder 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
