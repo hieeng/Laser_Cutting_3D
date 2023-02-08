@@ -25,7 +25,5 @@ public class Block : MonoBehaviour
         }
         else
             elapsed = 0;
-
-
     }
 }
