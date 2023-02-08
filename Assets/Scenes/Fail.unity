@@ -19277,6 +19277,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: RewardParticle
       objectReference: {fileID: 0}
+    - target: {fileID: 639530518597566954, guid: dadbe930eed1646128d809e0117872a1, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 639530518597566954, guid: dadbe930eed1646128d809e0117872a1, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 639530518597566954, guid: dadbe930eed1646128d809e0117872a1, type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 639530518597566954, guid: dadbe930eed1646128d809e0117872a1, type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 639530518597566954, guid: dadbe930eed1646128d809e0117872a1, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 8077221387706127748, guid: dadbe930eed1646128d809e0117872a1, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -19287,7 +19307,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8077221387706127748, guid: dadbe930eed1646128d809e0117872a1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.25
+      value: 2.09
       objectReference: {fileID: 0}
     - target: {fileID: 8077221387706127748, guid: dadbe930eed1646128d809e0117872a1, type: 3}
       propertyPath: m_LocalPosition.z
