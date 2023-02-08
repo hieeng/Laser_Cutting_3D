@@ -4,30 +4,41 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
-    [SerializeField] Animation curve;
-    [SerializeField] float deltaTime;
+    [SerializeField] AnimationCurve curve;
+    [SerializeField] bool isHit;
+    [SerializeField] float shakeTime;
+    [SerializeField] float shakeAmount;
+
 
     Coroutine _coroutineShake = null;
 
-    public void Shake(Vector3 dir, AnimationCurve curve, float timeLength, float maximumDistance)
+    private void Update() 
     {
-        if (null != _coroutineShake)
-            StopCoroutine(_coroutineShake);
-        _coroutineShake = StartCoroutine(CoroutineShake(dir, curve, timeLength, maximumDistance));
+        Shake();
     }
 
-    IEnumerator CoroutineShake(Vector3 dir, AnimationCurve curve, float timeLength, float maximumDistance)
+    public void Shake()
     {
-        var elapsed = 0.0f;
-        while (elapsed < timeLength)
+        if (!isHit)
+            return;
+        if (null != _coroutineShake)
+            StopCoroutine(_coroutineShake);
+        _coroutineShake = StartCoroutine(CoroutineShake());
+    }
+
+    IEnumerator CoroutineShake()
+    {
+        float timer = 0.0f;
+        var originPos = transform.position;
+        var shakePostion = new Vector3(Random.Range(-0.1f, 0.1f), 0f, Random.Range(-0.1f, 0.1f));
+
+        while(timer <= shakeTime)
         {
+            transform.localPosition = shakePostion * shakeAmount + originPos;
+    
+            timer += Time.deltaTime;
             yield return null;
-            elapsed += Time.deltaTime;
-            var factor              = curve.Evaluate(elapsed / timeLength) * maximumDistance;
-            transform.localPosition = dir * factor;
         }
-        
-        transform.localPosition = Vector3.zero;
-        _coroutineShake         = null;
+        transform.localPosition = originPos;
     }
 }
