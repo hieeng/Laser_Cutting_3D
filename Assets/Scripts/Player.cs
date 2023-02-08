@@ -9,6 +9,7 @@ public class Player : CustomBehaviour
     [SerializeField] float _shootInterval = 0.1f;
     [SerializeField] Transform _tower;
     [SerializeField] ParticleSystem _particle;
+    [SerializeField] ParticleSystem _deadParticle;
     [SerializeField] GameObject _laser;
     [SerializeField] GameObject _pointer;
     [SerializeField] Material _gemMat;
@@ -22,11 +23,23 @@ public class Player : CustomBehaviour
     int _gemMask;
     int _blockMask;
     
+    Action _doStart;
+    public event Action DoStart
+    {
+        add => _doStart += value;
+        remove => _doStart -=value;
+    }
     Action _doStop;
     public event Action DoStop
     {
         add => _doStop += value;
         remove => _doStop -=value;
+    }
+    Action _doEnd;
+    public event Action DoEnd
+    {
+        add => _doEnd += value;
+        remove => _doEnd -=value;
     }
 
     // Start is called before the first frame update
@@ -38,6 +51,7 @@ public class Player : CustomBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.IsEnd) return;
         Shoot();
     }
 
@@ -57,6 +71,7 @@ public class Player : CustomBehaviour
        
         if (Input.GetMouseButton(0))
         {
+            _doStart?.Invoke();
             if (Time.time - _shootStart < _shootInterval) return;
             RaycastHit hit;
            _laser.gameObject.SetActive(true);
@@ -128,6 +143,10 @@ public class Player : CustomBehaviour
             var main = _laserParitcle[i].main;
             main.startColor = _deadColor;
         }
+        gameObject.SetActive(false);
+        _deadParticle.transform.position = transform.position;
+        _deadParticle.gameObject.SetActive(true);
+        _doEnd?.Invoke();
         //TODO : GameOver넣어야함
     }
 }

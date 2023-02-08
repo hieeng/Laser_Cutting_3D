@@ -11,19 +11,50 @@ public class GameManager : MonoBehaviour
     [SerializeField] Tracker _tracker;
     [SerializeField] StageManager _stageManager;
 
-    public int Gem{get; set;} = 0;
+    public static int Gem{get; set;} = 0;
     public int Score{get; set;} = 0;
+    private bool _isEnd = false;
+    public bool IsEnd{get => _isEnd;}
 
     static public GameManager Instance;
     private void Awake() 
     {
+        if (Instance != null) 
+        {
+            Destroy(this);
+            return;
+        }
         Instance = this;
+        _player.DoEnd += Lose;
+        _player.DoStart += GameStart;
         _player.Init();
+        _uiManager.SetGemText(Gem);
+        _uiManager.OnStartPanel();
         //...
     }
 
     public int GetCurrentStageLevel()
     {
         return _stageManager.stage;
+    }
+    void Lose()
+    {
+        Gem += 10;
+        _uiManager.SetGemText(Gem);
+        StartCoroutine(LoseCo());
+    }
+    IEnumerator LoseCo()
+    {
+        _isEnd = true;
+
+        yield return new WaitForSeconds(0.5f);
+        _uiManager.OnLosePanel();
+    }
+
+
+    void GameStart()
+    {
+        if (!_uiManager.StartPanel.activeSelf) return;
+        _uiManager.OffStartPanel();
     }
 }

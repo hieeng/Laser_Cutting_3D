@@ -11,6 +11,7 @@ public class Block : MonoBehaviour
 
     private void Update() 
     {
+        if (GameManager.Instance.IsEnd) return;
         Rotation();
     }
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] GameObject startPanel;
@@ -18,6 +18,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] Text loseScoreText;
     [SerializeField] Text BestScoreText;
 
+    public GameObject StartPanel
+    {
+        get => startPanel;
+    }
     //패널
     public void OnStartPanel()
     {
@@ -75,7 +79,7 @@ public class UIManager : MonoBehaviour
     public void ReStartButton()
     {
         OffLosePanel();
-        OnStartPanel();
+        SceneManager.LoadScene("Chewy");
     }
 
     public void ADButton()
@@ -85,9 +89,9 @@ public class UIManager : MonoBehaviour
     
 
     //텍스트
-    public void SetGemText()
+    public void SetGemText(int gem)
     {
-        gemText.text = string.Format("{0:n0}", GameManager.Instance.Gem);
+        gemText.text = string.Format("{0:n0}", gem);
     }
 
     public void SetInGameStageText()
