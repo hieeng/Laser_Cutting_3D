@@ -4,43 +4,38 @@ using UnityEngine;
 
 public class Combine : MonoBehaviour
 {
-    List<MeshFilter> meshFilters = new List<MeshFilter>();
-    List<CombineInstance> combine = new List<CombineInstance>();
-    MeshFilter meshFilter;
+    List<MeshFilter> _meshFilters = new List<MeshFilter>();
+    List<CombineInstance> _combine = new List<CombineInstance>();
+    MeshFilter _meshFilter;
+    public List<CombineInstance> CombineInst {get => _combine;}
     // Start is called before the first frame update
     void Start()
     {
         MeshFilter[] meshs = GetComponentsInChildren<MeshFilter>();
-        meshFilters.AddRange(meshs);
-        Debug.Log(meshFilters.Count);
+        _meshFilters.AddRange(meshs);
+        Debug.Log(_meshFilters.Count);
         int i = 0;
-        while (i < meshFilters.Count)
+        while (i < _meshFilters.Count)
         {
             CombineInstance ci = new CombineInstance();
-            ci.mesh = meshFilters[i].mesh;
-            ci.transform = meshFilters[i].transform.localToWorldMatrix;
-            combine.Add(ci);
-            meshFilters[i].gameObject.SetActive(false);
+            ci.mesh = _meshFilters[i].mesh;
+            ci.transform = _meshFilters[i].transform.localToWorldMatrix;
+            _combine.Add(ci);
+            _meshFilters[i].gameObject.SetActive(false);
             i++;
         }
         transform.position = Vector3.zero;
         transform.rotation = Quaternion.Euler(0, -90.0f, 0);
-        meshFilter = transform.GetComponent<MeshFilter>();
-        meshFilter.mesh = new Mesh();
-        meshFilter.mesh.CombineMeshes(combine.ToArray());
+        _meshFilter = transform.GetComponent<MeshFilter>();
+        _meshFilter.mesh = new Mesh();
+        _meshFilter.mesh.CombineMeshes(_combine.ToArray());
         transform.gameObject.SetActive(true); 
-        transform.gameObject.AddComponent<BoxCollider>();       
+        transform.gameObject.AddComponent<BoxCollider>();
+        transform.gameObject.GetComponent<Pie>()._combine = _combine;
     }
 
-    public bool Bake()
+    public void Bake()
     {
-        if (combine.Count <= 0) 
-        {
-            gameObject.SetActive(false);
-            return false;
-        }
-        combine.RemoveAt(combine.Count - 1);
-        meshFilter.mesh.CombineMeshes(combine.ToArray());
-        return true;
+        _meshFilter.mesh.CombineMeshes(_combine.ToArray());
     }
 }

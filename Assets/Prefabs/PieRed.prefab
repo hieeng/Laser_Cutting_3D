@@ -3620,7 +3620,8 @@ GameObject:
   - component: {fileID: 4038418259310180607}
   - component: {fileID: 4038418259310180606}
   - component: {fileID: 2473277778848154010}
-  m_Layer: 0
+  - component: {fileID: 3854039323978478787}
+  m_Layer: 7
   m_Name: PieRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3801,6 +3802,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d920aa0e665ce493fad859c89565a5f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3854039323978478787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4038418259310180603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8882cac25bee04571a6435c94f3c3dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4048967706320860232

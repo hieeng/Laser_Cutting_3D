@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,15 @@ public class Player : CustomBehaviour
     [SerializeField] Transform _tower;
     float _shootStart = 0;
     float _rotY = 0;
+
+    Action _doStop;
+
+    public event Action DoStop
+    {
+        add => _doStop += value;
+        remove => _doStop -=value;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,12 +47,16 @@ public class Player : CustomBehaviour
             if (!Physics.Raycast(transform.position, transform.forward, out hit, 100.0f, LayerMask.GetMask("Tower")))
                 return;
             //ChangeScale(hit);
-            Combine cb = hit.collider.gameObject.GetComponent<Combine>();
-            if (!cb.Bake()) return;
+            Pie pie = hit.collider.gameObject.GetComponent<Pie>();
+            Debug.Log("shoot");
+            if (!pie.CutOff()) return;
             _rotY = 360.0f/101;
             _tower.Rotate(0, _rotY, 0);
-            //cb.transform.Rotate(0, _rotY, 0);
             _shootStart = Time.time;
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            _doStop?.Invoke();
         }
     }
 
