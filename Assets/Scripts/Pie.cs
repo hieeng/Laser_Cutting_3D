@@ -5,12 +5,11 @@ using UnityEngine;
 
 public class Pie : MonoBehaviour
 {
-    [SerializeField] ParticleSystem _particle;
     public List<CombineInstance> _combine {get; set;}
     Combine _cb;
-
+    Material _mat;
+    public Material Mat {get => _mat;}
     Action _doDown;
-    
     public event Action DoDown
     {
         add => _doDown += value;
@@ -20,6 +19,7 @@ public class Pie : MonoBehaviour
     void Start()
     {
         _cb = GetComponent<Combine>();
+        _mat = GetComponent<MeshRenderer>().sharedMaterial;
     }
 
     // Update is called once per frame
@@ -32,7 +32,6 @@ public class Pie : MonoBehaviour
     {
         if (_combine.Count <= 0) 
         {
-            Stop();
             gameObject.SetActive(false);
             _doDown?.Invoke();
             return false;
@@ -40,12 +39,6 @@ public class Pie : MonoBehaviour
         Debug.Log("cut");
         _combine.RemoveAt(_combine.Count - 1);
         _cb.Bake();
-        _particle.Play();
         return true;
-    }
-
-    public void Stop()
-    {
-        _particle.Stop();
     }
 }

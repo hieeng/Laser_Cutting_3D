@@ -8,6 +8,8 @@ public class Player : CustomBehaviour
     [SerializeField] float _power = 0.01f;
     [SerializeField] float _shootInterval = 0.1f;
     [SerializeField] Transform _tower;
+    [SerializeField] ParticleSystem _particle;
+    ParticleSystemRenderer _particleRenderer;
     float _shootStart = 0;
     float _rotY = 0;
 
@@ -33,7 +35,8 @@ public class Player : CustomBehaviour
 
     public override void Init()
     {
-
+        _particleRenderer = _particle.GetComponent<ParticleSystemRenderer>();
+        Debug.Log(_particleRenderer);
     }
 
     void Shoot()
@@ -48,15 +51,21 @@ public class Player : CustomBehaviour
                 return;
             //ChangeScale(hit);
             Pie pie = hit.collider.gameObject.GetComponent<Pie>();
-            Debug.Log("shoot");
-            if (!pie.CutOff()) return;
+            if (!pie.CutOff()) 
+            {
+                _particle.gameObject.SetActive(false);
+                return;
+            }
+            _particleRenderer.material = pie.Mat;
+            _particle.transform.position = hit.point;
+            _particle.gameObject.SetActive(true);
             _rotY = 360.0f/101;
             _tower.Rotate(0, _rotY, 0);
             _shootStart = Time.time;
         }
         if (Input.GetMouseButtonUp(0))
         {
-            _doStop?.Invoke();
+            _particle.gameObject.SetActive(false);
         }
     }
 
