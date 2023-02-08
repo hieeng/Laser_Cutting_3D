@@ -30,7 +30,7 @@ public class Combine : MonoBehaviour
         _meshFilter.mesh = new Mesh();
         _meshFilter.mesh.CombineMeshes(_combine.ToArray());
         transform.gameObject.SetActive(true); 
-        transform.gameObject.AddComponent<BoxCollider>();
+        transform.gameObject.AddComponent<MeshCollider>();
         transform.gameObject.GetComponent<Pie>()._combine = _combine;
     }
 
