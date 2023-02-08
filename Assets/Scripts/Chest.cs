@@ -15,7 +15,6 @@ public class Chest : MonoBehaviour
     bool isOpen = false;
 
     Animator anim;
-    Coroutine _coroutineShake = null;
 
     private void Awake() 
     {
