@@ -12,12 +12,17 @@ public class Player : CustomBehaviour
     [SerializeField] GameObject _laser;
     [SerializeField] GameObject _pointer;
     [SerializeField] Material _gemMat;
+    [SerializeField] Color _deadColor = Color.red;
     ParticleSystemRenderer _particleRenderer;
+    LineRenderer _laserRenderer;
+    ParticleSystem[] _laserParitcle;
     float _shootStart = 0;
     float _rotY = 0;
-
+    int _layerMask;
+    int _gemMask;
+    int _blockMask;
+    
     Action _doStop;
-
     public event Action DoStop
     {
         add => _doStop += value;
@@ -40,7 +45,11 @@ public class Player : CustomBehaviour
     {
         _particleRenderer = _particle.GetComponent<ParticleSystemRenderer>();
         _pointer.gameObject.SetActive(true);
-        Debug.Log(_particleRenderer);
+        _gemMask = LayerMask.GetMask("Gem");
+        _blockMask = LayerMask.GetMask("Block");
+        _layerMask = LayerMask.GetMask("Tower") | _gemMask | _blockMask;
+        _laserRenderer = _laser.GetComponent<LineRenderer>();
+        _laserParitcle = _laser.GetComponentsInChildren<ParticleSystem>();
     }
 
     void Shoot()
@@ -52,12 +61,16 @@ public class Player : CustomBehaviour
             RaycastHit hit;
            _laser.gameObject.SetActive(true);
             Debug.DrawRay(transform.position, transform.forward * 100.0f, Color.red);
-            if (!Physics.Raycast(transform.position, transform.forward, out hit, 100.0f, LayerMask.GetMask("Tower")|LayerMask.GetMask("Gem")))
+            if (!Physics.Raycast(transform.position, transform.forward, out hit, 100.0f, _layerMask))
                 return;
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Block"))
+            {
+                InteractionBlock();
+                return;
+            }
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Gem"))
             {
                 hit.collider.gameObject.SetActive(false);
-                //ShowParticle(_gemMat, hit.point);
                 return;
             }
             //ChangeScale(hit);
@@ -104,5 +117,17 @@ public class Player : CustomBehaviour
     void HideParticle()
     {
         _particle.gameObject.SetActive(false);
+    }
+
+    void InteractionBlock()
+    {
+        _laserRenderer.startColor = _deadColor;
+        _laserRenderer.endColor = _deadColor;
+        for (int i = 0; i < _laserParitcle.Length; i++)
+        {
+            var main = _laserParitcle[i].main;
+            main.startColor = _deadColor;
+        }
+        //TODO : GameOver넣어야함
     }
 }
