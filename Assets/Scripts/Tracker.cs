@@ -7,12 +7,14 @@ public class Tracker : MonoBehaviour
     [SerializeField] AnimationCurve _aniCurve;
     [SerializeField] Transform _player;
     [SerializeField] Transform _camera;
+    [SerializeField] Transform _Tracker;
 
     [SerializeField] float _shakeTime = 1.0f;
     [SerializeField] float _shakeSpeed = 2.0f;
     [SerializeField] float _shakeAmount = 1.0f;
 
-    [SerializeField] Vector3 _caPos2;
+
+    [SerializeField] float _offsetX, _offsetY, _offsetZ;
 
 
     // Start is called before the first frame update
@@ -23,7 +25,9 @@ public class Tracker : MonoBehaviour
 
     void LateUpdate()
     {
-        transform.position = Vector3.Lerp(transform.position, _caPos2, Time.deltaTime * 5);
+        Vector3 targetPos = new Vector3(_player.transform.position.x + _offsetX, _player.transform.position.y + _offsetY, _player.transform.position.z + _offsetZ);
+
+        _Tracker.transform.position = targetPos;
     }
 
     // Update is called once per frame
