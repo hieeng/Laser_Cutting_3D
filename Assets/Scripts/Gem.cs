@@ -10,5 +10,6 @@ public class Gem : MonoBehaviour
     {
         _rewardParticle.transform.position = transform.position;
         _rewardParticle.gameObject.SetActive(true);
+        gameObject.SetActive(false);
     }
 }

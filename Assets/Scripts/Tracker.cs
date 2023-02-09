@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,11 +14,11 @@ public class Tracker : MonoBehaviour
     [SerializeField] float _shakeAmount = 1.0f;
 
 
-    [SerializeField] float _offsetX, _offsetY, _offsetZ;
+    [SerializeField] Vector3 _offset;
 
     [SerializeField] Transform[] _startPos;
     
-
+    [SerializeField] float _camMoveTime = 0.5f;
 
 
     // Start is called before the first frame update
@@ -26,17 +27,9 @@ public class Tracker : MonoBehaviour
         
     }
 
-    void NextSession()
+    public void NextSession(Action move)
     {
-        var next = _startPos[GameManager.Instance.CurrentSession + 1].position;
-        _Tracker.transform.position = Vector3.Lerp(transform.position, next, 2f * Time.deltaTime);
-        
-    }
-
-    void LateUpdate()
-    {
-
-
+        StartCoroutine(MoveNextSessionCo(move));
     }
 
     // Update is called once per frame
@@ -62,7 +55,7 @@ public class Tracker : MonoBehaviour
 
         while (elapsedTime < _shakeTime)
         {
-            Vector3 randomPoint = position + Random.insideUnitSphere;
+            Vector3 randomPoint = position + UnityEngine.Random.insideUnitSphere;
             var a = _aniCurve.Evaluate(elapsedTime/_shakeTime) * _shakeAmount;
             _camera.localPosition = Vector3.Lerp(_camera.localPosition, randomPoint * a, Time.deltaTime * _shakeSpeed);
 
@@ -74,5 +67,17 @@ public class Tracker : MonoBehaviour
         _camera.localPosition = position;
     }
 
+    IEnumerator MoveNextSessionCo(Action move)
+    {
+        var next = _startPos[GameManager.Instance.CurrentSession].position + _offset;
+        float time = 0.0f;
+        while(time < _camMoveTime)
+        {
+            yield return null;
+            _Tracker.transform.position = Vector3.Lerp(transform.position, next, time / _camMoveTime);
+            time += Time.deltaTime;
+        }
+        move?.Invoke();
+    }
 
 }

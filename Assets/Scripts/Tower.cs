@@ -7,6 +7,7 @@ public class Tower : CustomBehaviour
     [SerializeField] float _floorSize = 0.24f;
     [SerializeField] float _fallTime = 0.5f;
     [SerializeField] Chest _chest = null;
+    [SerializeField] Gem _gem = null;
     [SerializeField] Pie[] _pies = null;
     Combine[] _combines;
     int _currentHight = 0;
@@ -46,10 +47,6 @@ public class Tower : CustomBehaviour
 
     public void CrashGem()
     {
-        //TODO: 카메라이동 -> UI표시
-        GameManager.Instance.CurrentSession++;
-        //카메라 이동 완료후
-        //UI -> 플레이어 가 이동
-
+        _gem.RewardParticle();
     }
 }

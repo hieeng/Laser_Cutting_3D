@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,10 +16,15 @@ public class GameManager : MonoBehaviour
     public int Score{get; set;} = 0;
     private bool _isEnd = false;
     public bool IsEnd{get => _isEnd;}
+    public bool IsCamMove{get; set;} = false;
     public int CurrentSession
     {
         get => _currentSession;
         set => _currentSession = value;
+    }
+    public Tracker Tracker
+    {
+        get => _tracker;
     }
     static public GameManager Instance;
     private void Awake()
@@ -33,6 +39,7 @@ public class GameManager : MonoBehaviour
         _player.DoStart += GameStart;
         _player.DoRotateTower += DoRotateTower;
         _player.DoOpenChest += DoOpenChest;
+        _player.DoCrashGem += DoCrashGem;
         _player.Init();
         _uiManager.SetGemText(Gem);
         _uiManager.OnStartPanel();
@@ -90,10 +97,20 @@ public class GameManager : MonoBehaviour
     {
         int idx = _currentSession;
         _towers[idx].CrashGem();
-        var pos = _tracker.transform.position;
-        pos.y = 0;
-        pos.z += 5;
-        _player.transform.position = pos;
-        //애니메이션
+        _currentSession++;
+        //카메라 애니메이션
+        _player.MoveBackAni();
+       StartCoroutine(NextSessionCo(_player.MoveAni));
+    }
+
+    IEnumerator NextSessionCo(Action move)
+    {
+        float time = 0.0f;
+        while(time < 0.8f)
+        {
+            yield return null;
+            time += Time.deltaTime;
+        }
+        _tracker.NextSession(move);
     }
 }

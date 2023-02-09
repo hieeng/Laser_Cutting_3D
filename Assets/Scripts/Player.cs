@@ -14,6 +14,8 @@ public class Player : CustomBehaviour
     [SerializeField] GameObject _pointer;
     [SerializeField] Material _gemMat;
     [SerializeField] Color _deadColor = Color.red;
+    [SerializeField] float _aniMoveFactor = 1.95f;
+    [SerializeField] float _aniMoveTime = 0.5f;
     ParticleSystemRenderer _particleRenderer;
     LineRenderer _laserRenderer;
     ParticleSystem[] _laserParitcle;
@@ -52,6 +54,13 @@ public class Player : CustomBehaviour
     {
         add => _doOpenChest += value;
         remove => _doOpenChest -=value;
+    }
+
+    Action _doCrashGem;
+    public event Action DoCrashGem
+    {
+        add => _doCrashGem += value;
+        remove => _doCrashGem -=value;
     }
 
     // Start is called before the first frame update
@@ -105,7 +114,7 @@ public class Player : CustomBehaviour
             }
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Gem"))
             {
-                hit.collider.gameObject.SetActive(false);
+                InterActionGem();
                 return;
             }
             //ChangeScale(hit);
@@ -173,5 +182,51 @@ public class Player : CustomBehaviour
     void InterActionChest()
     {
         _doOpenChest?.Invoke();
+    }
+
+    void InterActionGem()
+    {
+        _pointer.SetActive(false);
+        _doCrashGem?.Invoke();
+    }
+
+    public void MoveAni()
+    {
+         StartCoroutine(MoveAniCo());
+    }
+
+    IEnumerator MoveAniCo()
+    {
+        //pos.z += _aniMoveFactor;
+        float time = 0.0f;
+        var pos = GameManager.Instance.Tracker.transform.position;
+        pos.y = 0.26f;
+        pos.z += 1;
+        transform.position = pos;
+        pos.z += _aniMoveFactor;
+        while(time < _aniMoveTime)
+        {
+            yield return null;
+            transform.position = Vector3.Lerp(transform.position, pos, time / _aniMoveTime);
+            time += Time.deltaTime;
+        }
+        _pointer.SetActive(false);
+    }
+
+    public void MoveBackAni()
+    {
+        StartCoroutine(MoveBackAniCo());
+    }
+    IEnumerator MoveBackAniCo()
+    {
+        var pos = transform.position;
+        pos.z -=2;
+        var time = 0.0f;
+        while(time < _aniMoveTime)
+        {
+            yield return null;
+            transform.position = Vector3.Lerp(transform.position, pos, time / _aniMoveTime);
+            time += Time.deltaTime;
+        }
     }
 }
