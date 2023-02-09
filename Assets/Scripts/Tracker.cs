@@ -25,9 +25,12 @@ public class Tracker : MonoBehaviour
 
     void LateUpdate()
     {
+        
         Vector3 targetPos = new Vector3(_player.transform.position.x + _offsetX, _player.transform.position.y + _offsetY, _player.transform.position.z + _offsetZ);
 
-        _Tracker.transform.position = targetPos;
+        _Tracker.transform.position = Vector3.Lerp(transform.position, targetPos, 2f * Time.deltaTime);
+
+        //_Tracker.transform.position = targetPos;
     }
 
     // Update is called once per frame
