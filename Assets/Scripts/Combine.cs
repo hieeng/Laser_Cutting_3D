@@ -11,6 +11,16 @@ public class Combine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+       
+    }
+
+    public void Bake()
+    {
+        _meshFilter.mesh.CombineMeshes(_combine.ToArray());
+    }
+
+    public void Init()
+    {
         MeshFilter[] meshs = GetComponentsInChildren<MeshFilter>();
         _meshFilters.AddRange(meshs);
         Debug.Log(_meshFilters.Count);
@@ -25,17 +35,12 @@ public class Combine : MonoBehaviour
             i++;
         }
         transform.position = Vector3.zero;
-        transform.rotation = Quaternion.Euler(0, -90.0f, 0);
         _meshFilter = transform.GetComponent<MeshFilter>();
         _meshFilter.mesh = new Mesh();
         _meshFilter.mesh.CombineMeshes(_combine.ToArray());
         transform.gameObject.SetActive(true); 
         transform.gameObject.AddComponent<MeshCollider>();
         transform.gameObject.GetComponent<Pie>()._combine = _combine;
-    }
-
-    public void Bake()
-    {
-        _meshFilter.mesh.CombineMeshes(_combine.ToArray());
+        //transform.localRotation = Quaternion.Euler(0, -90.0f, 0);
     }
 }

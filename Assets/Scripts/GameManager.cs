@@ -30,6 +30,10 @@ public class GameManager : MonoBehaviour
         _player.Init();
         _uiManager.SetGemText(Gem);
         _uiManager.OnStartPanel();
+        for (int i = 0; i < _towers.Length; i++)
+        {
+            _towers[i].Init();
+        }
         //...
     }
 
