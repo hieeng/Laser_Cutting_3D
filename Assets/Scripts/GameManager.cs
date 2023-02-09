@@ -10,16 +10,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] Block[] _blocks;
     [SerializeField] Tracker _tracker;
     [SerializeField] StageManager _stageManager;
-    [SerializeField] int _currentSession;
+    [SerializeField] int _currentSession = 0;
     public static int Gem{get; set;} = 0;
     public int Score{get; set;} = 0;
     private bool _isEnd = false;
     public bool IsEnd{get => _isEnd;}
-
-    static public GameManager Instance;
-    private void Awake() 
+    public int CurrentSession
     {
-        if (Instance != null) 
+        get => _currentSession;
+        set => _currentSession = value;
+    }
+    static public GameManager Instance;
+    private void Awake()
+    {
+        if (Instance != null)
         {
             Destroy(this);
             return;
@@ -36,9 +40,9 @@ public class GameManager : MonoBehaviour
         {
             _towers[i].Init();
         }
+        _uiManager.ShowCurrentSession();
         //...
     }
-
     public int GetCurrentStageLevel()
     {
         return _stageManager.stage;
@@ -62,6 +66,7 @@ public class GameManager : MonoBehaviour
     {
         if (!_uiManager.StartPanel.activeSelf) return;
         _uiManager.OffStartPanel();
+        _uiManager.OnInGamePanel();
     }
 
     public void ShowFeedBack()
@@ -79,5 +84,16 @@ public class GameManager : MonoBehaviour
     {
         int idx = _currentSession;
         _towers[idx].OpenChest();
+    }
+
+    void DoCrashGem()
+    {
+        int idx = _currentSession;
+        _towers[idx].CrashGem();
+        var pos = _tracker.transform.position;
+        pos.y = 0;
+        pos.z += 5;
+        _player.transform.position = pos;
+        //애니메이션
     }
 }
