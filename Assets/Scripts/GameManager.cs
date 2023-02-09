@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
         _player.DoEnd += Lose;
         _player.DoStart += GameStart;
         _player.DoRotateTower += DoRotateTower;
+        _player.DoOpenChest += DoOpenChest;
         _player.Init();
         _uiManager.SetGemText(Gem);
         _uiManager.OnStartPanel();
@@ -72,5 +73,11 @@ public class GameManager : MonoBehaviour
     {
         int idx = _currentSession;
         _towers[idx].transform.Rotate(0, rotY, 0);
+    }
+
+    void DoOpenChest()
+    {
+        int idx = _currentSession;
+        _towers[idx].OpenChest();
     }
 }

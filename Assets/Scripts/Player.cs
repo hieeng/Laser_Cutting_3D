@@ -48,6 +48,12 @@ public class Player : CustomBehaviour
         add => _doRotateTower += value;
         remove => _doRotateTower -=value;
     }
+    Action _doOpenChest;
+    public event Action DoOpenChest
+    {
+        add => _doOpenChest += value;
+        remove => _doOpenChest -=value;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -93,6 +99,7 @@ public class Player : CustomBehaviour
             }
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Chest"))
             {
+                InterActionChest();
                 return;
             }
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Gem"))
@@ -164,6 +171,6 @@ public class Player : CustomBehaviour
 
     void InterActionChest()
     {
-        
+        _doOpenChest?.Invoke();
     }
 }
