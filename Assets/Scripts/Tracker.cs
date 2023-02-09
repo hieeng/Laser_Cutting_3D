@@ -5,7 +5,6 @@ using UnityEngine;
 public class Tracker : MonoBehaviour
 {
     [SerializeField] AnimationCurve _aniCurve;
-    [SerializeField] Transform _player;
     [SerializeField] Transform _camera;
     [SerializeField] Transform _Tracker;
 
@@ -16,6 +15,9 @@ public class Tracker : MonoBehaviour
 
     [SerializeField] float _offsetX, _offsetY, _offsetZ;
 
+    [SerializeField] Transform _startPos;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -23,14 +25,19 @@ public class Tracker : MonoBehaviour
         
     }
 
+    void NextSession()
+    {
+        _Tracker.transform.position = Vector3.Lerp(transform.position, _startPos.transform.position, 2f * Time.deltaTime);
+        
+    }
+
     void LateUpdate()
     {
-        
-        Vector3 targetPos = new Vector3(_player.transform.position.x + _offsetX, _player.transform.position.y + _offsetY, _player.transform.position.z + _offsetZ);
 
-        _Tracker.transform.position = Vector3.Lerp(transform.position, targetPos, 2f * Time.deltaTime);
-
-        //_Tracker.transform.position = targetPos;
+        if (Input.GetKey(KeyCode.N))
+        {
+            NextSession();
+        }
     }
 
     // Update is called once per frame
@@ -41,6 +48,7 @@ public class Tracker : MonoBehaviour
             
             CameraShake();
         }
+
     }
 
     public void CameraShake()
