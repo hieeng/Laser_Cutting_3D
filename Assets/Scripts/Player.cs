@@ -22,8 +22,8 @@ public class Player : CustomBehaviour
     int _layerMask;
     int _gemMask;
     int _blockMask;
+    [SerializeField] Transform _startPos;
     int _chestMask;
-    
     Action _doStart;
     public event Action DoStart
     {
@@ -66,6 +66,7 @@ public class Player : CustomBehaviour
     {
         if (GameManager.Instance.IsEnd) return;
         Shoot();
+        NextSession();
     }
 
     public override void Init()
@@ -78,6 +79,15 @@ public class Player : CustomBehaviour
         _layerMask = LayerMask.GetMask("Tower") | _gemMask | _blockMask | _chestMask;
         _laserRenderer = _laser.GetComponent<LineRenderer>();
         _laserParitcle = _laser.GetComponentsInChildren<ParticleSystem>();
+    }
+
+    void NextSession()
+    {
+        if (Input.GetKey(KeyCode.N))
+        {
+            //transform.position = new Vector3(4.85f, 0.251f, 11.85f);
+            transform.position = _startPos.position;
+        }
     }
 
     void Shoot()
