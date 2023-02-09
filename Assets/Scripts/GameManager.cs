@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         {
             _towers[i].Init();
         }
-        _uiManager.ShowCurrentSession();
+        //_uiManager.ShowCurrentSession();
         //...
     }
     public int GetCurrentStageLevel()
@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
     void DoCrashGem()
     {
         int idx = _currentSession;
-        _towers[idx].CrashGem();
+        //_towers[idx].CrashGem();
         var pos = _tracker.transform.position;
         pos.y = 0;
         pos.z += 5;

@@ -15,7 +15,8 @@ public class Tracker : MonoBehaviour
 
     [SerializeField] float _offsetX, _offsetY, _offsetZ;
 
-    [SerializeField] Transform _startPos;
+    [SerializeField] Transform[] _startPos;
+    
 
 
 
@@ -27,17 +28,15 @@ public class Tracker : MonoBehaviour
 
     void NextSession()
     {
-        _Tracker.transform.position = Vector3.Lerp(transform.position, _startPos.transform.position, 2f * Time.deltaTime);
+        var next = _startPos[GameManager.Instance.CurrentSession + 1].position;
+        _Tracker.transform.position = Vector3.Lerp(transform.position, next, 2f * Time.deltaTime);
         
     }
 
     void LateUpdate()
     {
 
-        if (Input.GetKey(KeyCode.N))
-        {
-            NextSession();
-        }
+
     }
 
     // Update is called once per frame
