@@ -41,6 +41,7 @@ public class Chest : MonoBehaviour
             anim.SetBool("isOpen", isOpen);
             gemPartcile.SetActive(true);
             fanfareParticle.SetActive(true);
+            GameManager.Instance.IsWin = true;
         }
     }
 

@@ -1,3 +1,4 @@
+using System.Dynamic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ public class Player : CustomBehaviour
     [SerializeField] Color _deadColor = Color.red;
     [SerializeField] float _aniMoveFactor = 1.95f;
     [SerializeField] float _aniMoveTime = 0.5f;
+    [SerializeField] float _rayDistance = 20.0f;
     ParticleSystemRenderer _particleRenderer;
     LineRenderer _laserRenderer;
     ParticleSystem[] _laserParitcle;
@@ -73,6 +75,7 @@ public class Player : CustomBehaviour
     void Update()
     {
         if (GameManager.Instance.IsEnd) return;
+        if (GameManager.Instance.IsWin) return;
         Shoot();
     }
 
@@ -99,7 +102,7 @@ public class Player : CustomBehaviour
             if (Time.time - _shootStart < _shootInterval) return;
             RaycastHit hit;
            _laser.gameObject.SetActive(true);
-            Debug.DrawRay(transform.position, transform.forward * 100.0f, Color.red);
+            Debug.DrawRay(transform.position, transform.forward * _rayDistance, Color.red);
             if (!Physics.Raycast(transform.position, transform.forward, out hit, 100.0f, _layerMask))
                 return;
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Block"))

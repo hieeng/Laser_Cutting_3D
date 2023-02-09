@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public int Score{get; set;} = 0;
     private bool _isEnd = false;
     public bool IsEnd{get => _isEnd;}
+    public bool IsWin{get; set;} = false;
     public bool IsCamMove{get; set;} = false;
     public int CurrentSession
     {
@@ -112,5 +113,21 @@ public class GameManager : MonoBehaviour
             time += Time.deltaTime;
         }
         _tracker.NextSession(move);
+    }
+
+    void DoWin()
+    {
+        StartCoroutine(DoWinCo());
+    }
+
+    IEnumerator DoWinCo()
+    {
+        float time = 0.0f;
+        while(time < 1.5f)
+        {
+            yield return null;
+            time += Time.deltaTime;
+        }
+        _uiManager.OnWinPanel();
     }
 }
