@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] float time;
+    [SerializeField] float Delaytime;
     [SerializeField] GameObject startPanel;
     [SerializeField] GameObject inGamePanel;
     [SerializeField] GameObject winPanel;
@@ -19,6 +19,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] Text loseScoreText;
     [SerializeField] Text BestScoreText;
     [SerializeField] GameObject[] FeedBackText;
+
+    [SerializeField] GameObject session1;
+    [SerializeField] GameObject session2;
 
     public GameObject StartPanel
     {
@@ -131,8 +134,9 @@ public class UIManager : MonoBehaviour
 
     IEnumerator CoroutineShowFeedBack(GameObject text)
     {
+        var time = 0f;
 
-        while (time <= 0.5f)
+        while (time <= Delaytime)
         {
             time += Time.deltaTime;
             text.transform.localScale = Vector3.one * time * 3;

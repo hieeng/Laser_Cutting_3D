@@ -7,6 +7,7 @@ public class Block : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float timeLength;
     [SerializeField] AnimationCurve curve;
+    [SerializeField] Transform center;
     float elapsed = 0.0f;
 
     private void Update() 
@@ -21,7 +22,7 @@ public class Block : MonoBehaviour
         {
             elapsed += Time.deltaTime;
             var rSpeed = curve.Evaluate(elapsed / timeLength) * speed;
-            gameObject.transform.RotateAround(Vector3.zero, Vector3.up, rSpeed * Time.deltaTime);
+            gameObject.transform.RotateAround(center.position, Vector3.up, rSpeed * Time.deltaTime);
         }
         else
             elapsed = 0;

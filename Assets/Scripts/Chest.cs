@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
-    [SerializeField] GameObject particle;
+    [SerializeField] GameObject gemPartcile;
+    [SerializeField] GameObject fanfareParticle;
     [SerializeField] AnimationCurve curve;
     [SerializeField] bool isHit;
     [SerializeField] float shakeTime;
@@ -37,7 +38,8 @@ public class Chest : MonoBehaviour
         {
             isOpen = true;
             anim.SetBool("isOpen", isOpen);
-            particle.SetActive(true);
+            gemPartcile.SetActive(true);
+            fanfareParticle.SetActive(true);
         }
     }
 
