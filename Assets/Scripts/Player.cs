@@ -22,7 +22,8 @@ public class Player : CustomBehaviour
     int _layerMask;
     int _gemMask;
     int _blockMask;
-    
+    [SerializeField] Transform _startPos;
+    int _chestMask;
     Action _doStart;
     public event Action DoStart
     {
@@ -41,6 +42,18 @@ public class Player : CustomBehaviour
         add => _doEnd += value;
         remove => _doEnd -=value;
     }
+    Action<float> _doRotateTower;
+    public event Action<float> DoRotateTower
+    {
+        add => _doRotateTower += value;
+        remove => _doRotateTower -=value;
+    }
+    Action _doOpenChest;
+    public event Action DoOpenChest
+    {
+        add => _doOpenChest += value;
+        remove => _doOpenChest -=value;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -53,6 +66,7 @@ public class Player : CustomBehaviour
     {
         if (GameManager.Instance.IsEnd) return;
         Shoot();
+        NextSession();
     }
 
     public override void Init()
@@ -61,9 +75,19 @@ public class Player : CustomBehaviour
         _pointer.gameObject.SetActive(true);
         _gemMask = LayerMask.GetMask("Gem");
         _blockMask = LayerMask.GetMask("Block");
-        _layerMask = LayerMask.GetMask("Tower") | _gemMask | _blockMask;
+        _chestMask = LayerMask.GetMask("Chest");
+        _layerMask = LayerMask.GetMask("Tower") | _gemMask | _blockMask | _chestMask;
         _laserRenderer = _laser.GetComponent<LineRenderer>();
         _laserParitcle = _laser.GetComponentsInChildren<ParticleSystem>();
+    }
+
+    void NextSession()
+    {
+        if (Input.GetKey(KeyCode.N))
+        {
+            //transform.position = new Vector3(4.85f, 0.251f, 11.85f);
+            transform.position = _startPos.position;
+        }
     }
 
     void Shoot()
@@ -83,6 +107,11 @@ public class Player : CustomBehaviour
                 InteractionBlock();
                 return;
             }
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Chest"))
+            {
+                InterActionChest();
+                return;
+            }
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Gem"))
             {
                 hit.collider.gameObject.SetActive(false);
@@ -97,7 +126,7 @@ public class Player : CustomBehaviour
             }
             ShowParticle(pie.Mat, hit.point);
             _rotY = 360.0f/101;
-            _tower.Rotate(0, _rotY, 0);
+            _doRotateTower?.Invoke(_rotY);
             _shootStart = Time.time;
         }
         if (Input.GetMouseButtonUp(0))
@@ -148,5 +177,10 @@ public class Player : CustomBehaviour
         _deadParticle.gameObject.SetActive(true);
         _doEnd?.Invoke();
         //TODO : GameOver넣어야함
+    }
+
+    void InterActionChest()
+    {
+        _doOpenChest?.Invoke();
     }
 }

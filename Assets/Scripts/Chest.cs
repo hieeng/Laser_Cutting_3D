@@ -16,7 +16,11 @@ public class Chest : MonoBehaviour
     bool isOpen = false;
 
     Animator anim;
-
+    public bool IsHit
+    {
+        get => isHit;
+        set => isHit = value;
+    }
     private void Awake() 
     {
         anim = GetComponent<Animator>();
@@ -24,15 +28,12 @@ public class Chest : MonoBehaviour
 
     private void Update() 
     {
-        Open();
-        Shake();
+        //Open();
+        //Shake();
     }
 
     public void Open()
     {
-        if (!isHit)
-            return;
-
         currentTime += Time.deltaTime;
         if (currentTime >= openTime)
         {
@@ -45,8 +46,6 @@ public class Chest : MonoBehaviour
 
     public void Shake()
     {
-        if (!isHit)
-            return;
         if (isOpen)
             return;
 
@@ -55,4 +54,9 @@ public class Chest : MonoBehaviour
         transform.localPosition = shakePostion * shakeAmount + originPos;
     }
 
+    public void OpenChest()
+    {
+        Open();
+        Shake();
+    }
 }

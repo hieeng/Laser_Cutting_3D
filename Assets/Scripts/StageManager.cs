@@ -5,4 +5,5 @@ using UnityEngine;
 public class StageManager : MonoBehaviour
 {
     public int stage;
+    public int currentSession{get; set;} = 0;
 }

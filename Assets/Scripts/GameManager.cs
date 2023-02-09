@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Block[] _blocks;
     [SerializeField] Tracker _tracker;
     [SerializeField] StageManager _stageManager;
-
+    [SerializeField] int _currentSession;
     public static int Gem{get; set;} = 0;
     public int Score{get; set;} = 0;
     private bool _isEnd = false;
@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
         Instance = this;
         _player.DoEnd += Lose;
         _player.DoStart += GameStart;
+        _player.DoRotateTower += DoRotateTower;
+        _player.DoOpenChest += DoOpenChest;
         _player.Init();
         _uiManager.SetGemText(Gem);
         _uiManager.OnStartPanel();
@@ -65,5 +67,17 @@ public class GameManager : MonoBehaviour
     public void ShowFeedBack()
     {
         _uiManager.ShowFeedBack();
+    }
+
+    void DoRotateTower(float rotY)
+    {
+        int idx = _currentSession;
+        _towers[idx].transform.Rotate(0, rotY, 0);
+    }
+
+    void DoOpenChest()
+    {
+        int idx = _currentSession;
+        _towers[idx].OpenChest();
     }
 }

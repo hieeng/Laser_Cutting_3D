@@ -6,7 +6,8 @@ public class Tower : CustomBehaviour
 {
     [SerializeField] float _floorSize = 0.24f;
     [SerializeField] float _fallTime = 0.5f;
-    [SerializeField] Pie[] _pies;
+    [SerializeField] Chest _chest = null;
+    [SerializeField] Pie[] _pies = null;
     Combine[] _combines;
 
     public override void Init()
@@ -35,5 +36,10 @@ public class Tower : CustomBehaviour
             transform.position = Vector3.Lerp(transform.position, targetPos, time/_fallTime);
             time += Time.deltaTime;
         }
+    }
+
+    public void OpenChest()
+    {
+        _chest.OpenChest();
     }
 }
