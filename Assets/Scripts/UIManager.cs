@@ -20,9 +20,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] Text BestScoreText;
     [SerializeField] GameObject[] FeedBackText;
 
-    [SerializeField] GameObject session1;
-    [SerializeField] GameObject session2;
-
+    [SerializeField] GameObject[] session;
+    [SerializeField] GameObject[] clearSession;
     public GameObject StartPanel
     {
         get => startPanel;
@@ -145,5 +144,15 @@ public class UIManager : MonoBehaviour
         }
         time = 0;
         text.SetActive(false);
+    }
+
+    public void ShowCurrentSession()
+    {
+        session[GameManager.Instance.CurrentSession].SetActive(true);
+    }
+
+    public void ShowClearSession()
+    {
+        clearSession[GameManager.Instance.CurrentSession - 1].SetActive(true);
     }
 }
