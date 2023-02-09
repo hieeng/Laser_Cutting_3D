@@ -7,24 +7,17 @@ public class Tower : CustomBehaviour
     [SerializeField] float _floorSize = 0.24f;
     [SerializeField] float _fallTime = 0.5f;
     [SerializeField] Pie[] _pies;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        for (int i = 0; i < _pies.Length; i++)
-        {
-            _pies[i].DoDown += GoDown;
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {   
-    }
+    Combine[] _combines;
 
     public override void Init()
     {
-
+        _combines = gameObject.GetComponentsInChildren<Combine>(); 
+        for (int i = 0; i < _pies.Length; i++)
+        {
+            _combines[i].Init();
+            _pies[i].DoDown += GoDown;
+        }
+        transform.localRotation = Quaternion.Euler(0, -90.0f, 0);
     }
 
     void GoDown()
