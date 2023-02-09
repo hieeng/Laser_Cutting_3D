@@ -9,7 +9,7 @@ public class Tower : CustomBehaviour
     [SerializeField] Chest _chest = null;
     [SerializeField] Pie[] _pies = null;
     Combine[] _combines;
-
+    int _currentHight = 0;
     public override void Init()
     {
         _combines = gameObject.GetComponentsInChildren<Combine>(); 
@@ -19,6 +19,7 @@ public class Tower : CustomBehaviour
             _pies[i].DoDown += GoDown;
         }
         transform.localRotation = Quaternion.Euler(0, -90.0f, 0);
+        _currentHight = _pies.Length;
     }
 
     void GoDown()
@@ -33,7 +34,7 @@ public class Tower : CustomBehaviour
         while(time < _fallTime)
         {
             yield return null;
-            transform.position = Vector3.Lerp(transform.position, targetPos, time/_fallTime);
+            transform.position = Vector3.Lerp(transform.position, targetPos, time / _fallTime);
             time += Time.deltaTime;
         }
     }
@@ -41,5 +42,14 @@ public class Tower : CustomBehaviour
     public void OpenChest()
     {
         _chest.OpenChest();
+    }
+
+    public void CrashGem()
+    {
+        //TODO: 카메라이동 -> UI표시
+        GameManager.Instance.CurrentSession++;
+        //카메라 이동 완료후
+        //UI -> 플레이어 가 이동
+
     }
 }
