@@ -132,6 +132,7 @@ public class Player : CustomBehaviour
                 HideParticle();
                 return;
             }
+            GameManager.Instance.ScoreUp();
             ShowParticle(pie.Mat, hit.point);
             _rotY = 360.0f/101;
             _doRotateTower?.Invoke(_rotY);

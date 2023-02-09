@@ -132,4 +132,10 @@ public class GameManager : MonoBehaviour
         }
         _uiManager.OnWinPanel();
     }
+
+    public void ScoreUp()
+    {
+        Score++;
+        _uiManager.SetInGameScoreText();
+    }
 }
