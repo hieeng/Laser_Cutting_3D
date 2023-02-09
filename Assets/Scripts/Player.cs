@@ -22,6 +22,7 @@ public class Player : CustomBehaviour
     int _layerMask;
     int _gemMask;
     int _blockMask;
+    int _chestMask;
     
     Action _doStart;
     public event Action DoStart
@@ -40,6 +41,12 @@ public class Player : CustomBehaviour
     {
         add => _doEnd += value;
         remove => _doEnd -=value;
+    }
+    Action<float> _doRotateTower;
+    public event Action<float> DoRotateTower
+    {
+        add => _doRotateTower += value;
+        remove => _doRotateTower -=value;
     }
 
     // Start is called before the first frame update
@@ -61,7 +68,8 @@ public class Player : CustomBehaviour
         _pointer.gameObject.SetActive(true);
         _gemMask = LayerMask.GetMask("Gem");
         _blockMask = LayerMask.GetMask("Block");
-        _layerMask = LayerMask.GetMask("Tower") | _gemMask | _blockMask;
+        _chestMask = LayerMask.GetMask("Chest");
+        _layerMask = LayerMask.GetMask("Tower") | _gemMask | _blockMask | _chestMask;
         _laserRenderer = _laser.GetComponent<LineRenderer>();
         _laserParitcle = _laser.GetComponentsInChildren<ParticleSystem>();
     }
@@ -83,6 +91,10 @@ public class Player : CustomBehaviour
                 InteractionBlock();
                 return;
             }
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Chest"))
+            {
+                return;
+            }
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Gem"))
             {
                 hit.collider.gameObject.SetActive(false);
@@ -97,7 +109,7 @@ public class Player : CustomBehaviour
             }
             ShowParticle(pie.Mat, hit.point);
             _rotY = 360.0f/101;
-            _tower.Rotate(0, _rotY, 0);
+            _doRotateTower?.Invoke(_rotY);
             _shootStart = Time.time;
         }
         if (Input.GetMouseButtonUp(0))
@@ -148,5 +160,10 @@ public class Player : CustomBehaviour
         _deadParticle.gameObject.SetActive(true);
         _doEnd?.Invoke();
         //TODO : GameOver넣어야함
+    }
+
+    void InterActionChest()
+    {
+        
     }
 }
