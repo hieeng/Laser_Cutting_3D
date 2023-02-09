@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,7 +33,7 @@ public class Chest : MonoBehaviour
         //Shake();
     }
 
-    public void Open()
+    public void Open(Action doWin)
     {
         currentTime += Time.deltaTime;
         if (currentTime >= openTime)
@@ -42,6 +43,7 @@ public class Chest : MonoBehaviour
             gemPartcile.SetActive(true);
             fanfareParticle.SetActive(true);
             GameManager.Instance.IsWin = true;
+            doWin?.Invoke();
         }
     }
 
@@ -51,13 +53,13 @@ public class Chest : MonoBehaviour
             return;
 
         var originPos = transform.localPosition;
-        shakePostion = new Vector3(Random.Range(-0.1f, 0.1f), 0f, Random.Range(-0.1f, 0.1f));
+        shakePostion = new Vector3(UnityEngine.Random.Range(-0.1f, 0.1f), 0f, UnityEngine.Random.Range(-0.1f, 0.1f));
         transform.localPosition = shakePostion * shakeAmount + originPos;
     }
 
-    public void OpenChest()
+    public void OpenChest(Action doWin)
     {
-        Open();
+        Open(doWin);
         Shake();
     }
 }

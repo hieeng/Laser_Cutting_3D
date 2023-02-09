@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
     void DoOpenChest()
     {
         int idx = _currentSession;
-        _towers[idx].OpenChest();
+        _towers[idx].OpenChest(DoWin);
     }
 
     void DoCrashGem()
@@ -113,6 +113,8 @@ public class GameManager : MonoBehaviour
             time += Time.deltaTime;
         }
         _tracker.NextSession(move);
+        _uiManager.ShowCurrentSession();
+        _uiManager.ShowClearSession();
     }
 
     void DoWin()

@@ -75,7 +75,12 @@ public class Player : CustomBehaviour
     void Update()
     {
         if (GameManager.Instance.IsEnd) return;
-        if (GameManager.Instance.IsWin) return;
+        if (GameManager.Instance.IsWin || GameManager.Instance.IsCamMove)
+        {
+            _laser.SetActive(false);
+            _pointer.SetActive(false);
+            return;
+        }
         Shoot();
     }
 
@@ -213,11 +218,13 @@ public class Player : CustomBehaviour
             transform.position = Vector3.Lerp(transform.position, pos, time / _aniMoveTime);
             time += Time.deltaTime;
         }
-        _pointer.SetActive(false);
+        _pointer.SetActive(true);
+        GameManager.Instance.IsCamMove = false;
     }
 
     public void MoveBackAni()
     {
+        GameManager.Instance.IsCamMove = true;
         StartCoroutine(MoveBackAniCo());
     }
     IEnumerator MoveBackAniCo()

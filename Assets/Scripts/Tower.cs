@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,9 +41,9 @@ public class Tower : CustomBehaviour
         }
     }
 
-    public void OpenChest()
+    public void OpenChest(Action doWin)
     {
-        _chest.OpenChest();
+        _chest.OpenChest(doWin);
     }
 
     public void CrashGem()
