@@ -30,6 +30,7 @@ public class Tower : CustomBehaviour
     void GoDown()
     {
         StartCoroutine(GoDownCo());
+        GameManager.Instance.ShowFeedBack();
     }
     IEnumerator GoDownCo()
     {

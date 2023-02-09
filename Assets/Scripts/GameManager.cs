@@ -57,4 +57,9 @@ public class GameManager : MonoBehaviour
         if (!_uiManager.StartPanel.activeSelf) return;
         _uiManager.OffStartPanel();
     }
+
+    public void ShowFeedBack()
+    {
+        _uiManager.ShowFeedBack();
+    }
 }

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] float time;
     [SerializeField] GameObject startPanel;
     [SerializeField] GameObject inGamePanel;
     [SerializeField] GameObject winPanel;
@@ -17,6 +18,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] Text winScoreText;
     [SerializeField] Text loseScoreText;
     [SerializeField] Text BestScoreText;
+    [SerializeField] GameObject[] FeedBackText;
 
     public GameObject StartPanel
     {
@@ -117,5 +119,27 @@ public class UIManager : MonoBehaviour
     public void SetLoseScoreText()
     {
         loseScoreText.text = string.Format("{0:n0}", GameManager.Instance.Score);
+    }
+
+    public void ShowFeedBack()
+    {
+        int rand = Random.Range(0, 3);
+
+        FeedBackText[rand].SetActive(true);
+        StartCoroutine(CoroutineShowFeedBack(FeedBackText[rand]));
+    }
+
+    IEnumerator CoroutineShowFeedBack(GameObject text)
+    {
+
+        while (time <= 0.5f)
+        {
+            time += Time.deltaTime;
+            text.transform.localScale = Vector3.one * time * 3;
+
+            yield return null;
+        }
+        time = 0;
+        text.SetActive(false);
     }
 }
