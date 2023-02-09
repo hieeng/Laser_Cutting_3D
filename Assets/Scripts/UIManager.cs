@@ -100,7 +100,7 @@ public class UIManager : MonoBehaviour
 
     public void SetInGameStageText()
     {
-        inGameStageText.text = string.Format("레벨 : {0:n0}", GameManager.Instance.GetCurrentStageLevel());
+        inGameStageText.text = string.Format("Stage : {0:n0}", GameManager.Instance.GetCurrentStageLevel());
     }
 
     public void SetInGameScoreText()
@@ -110,7 +110,7 @@ public class UIManager : MonoBehaviour
 
     public void SetWinGameStageText()
     {
-        inGameStageText.text = string.Format("레벨 : {0:n0}", GameManager.Instance.GetCurrentStageLevel());
+        inGameStageText.text = string.Format("Stage : {0:n0}", GameManager.Instance.GetCurrentStageLevel());
     }
 
     public void SetWinScoreText()
@@ -138,7 +138,7 @@ public class UIManager : MonoBehaviour
         while (time <= Delaytime)
         {
             time += Time.deltaTime;
-            text.transform.localScale = Vector3.one * time * 3;
+            text.transform.localScale = Vector3.one * time/Delaytime * 1.5f;
 
             yield return null;
         }

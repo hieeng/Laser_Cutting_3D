@@ -108,7 +108,7 @@ public class Player : CustomBehaviour
             RaycastHit hit;
            _laser.gameObject.SetActive(true);
             Debug.DrawRay(transform.position, transform.forward * _rayDistance, Color.red);
-            if (!Physics.Raycast(transform.position, transform.forward, out hit, 100.0f, _layerMask))
+            if (!Physics.Raycast(transform.position, transform.forward, out hit, _rayDistance, _layerMask))
                 return;
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Block"))
             {
