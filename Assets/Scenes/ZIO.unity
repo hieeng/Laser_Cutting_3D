@@ -5108,6 +5108,9 @@ MonoBehaviour:
   - {fileID: 1140332633}
   - {fileID: 193110061}
   - {fileID: 170023973}
+  _blocks:
+  - {fileID: 559103157}
+  - {fileID: 944674536}
 --- !u!1001 &210553852
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7149,6 +7152,7 @@ MonoBehaviour:
   speed: 150
   timeLength: 5
   fallDownSize: 1
+  timeDestory: 50
   curve:
     serializedVersion: 2
     m_Curve:
@@ -7174,6 +7178,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   center: {fileID: 956362089}
+  isOver: 0
 --- !u!65 &559103158
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11414,7 +11419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.065324545, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.9128059, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -11488,6 +11493,7 @@ MonoBehaviour:
   speed: 50
   timeLength: 5
   fallDownSize: 1
+  timeDestory: 50
   curve:
     serializedVersion: 2
     m_Curve:
@@ -11513,6 +11519,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   center: {fileID: 956362089}
+  isOver: 0
 --- !u!65 &944674537
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13792,6 +13799,7 @@ MonoBehaviour:
   speed: 150
   timeLength: 5
   fallDownSize: 1
+  timeDestory: 50
   curve:
     serializedVersion: 2
     m_Curve:
@@ -13826,6 +13834,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   center: {fileID: 445856306}
+  isOver: 0
 --- !u!65 &1110484785
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15005,7 +15014,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.065324545, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.9128059, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -19953,7 +19962,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.065324545, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.9128059, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -20028,7 +20037,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.065324545, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.9128059, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -20723,6 +20732,7 @@ MonoBehaviour:
   speed: 50
   timeLength: 5
   fallDownSize: 1
+  timeDestory: 50
   curve:
     serializedVersion: 2
     m_Curve:
@@ -20748,6 +20758,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   center: {fileID: 445856306}
+  isOver: 0
 --- !u!65 &1760378243
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20880,6 +20891,9 @@ MonoBehaviour:
   - {fileID: 656369826}
   - {fileID: 1634243189}
   - {fileID: 1829682558}
+  _blocks:
+  - {fileID: 1110484784}
+  - {fileID: 1760378242}
 --- !u!1001 &1829682556
 PrefabInstance:
   m_ObjectHideFlags: 0

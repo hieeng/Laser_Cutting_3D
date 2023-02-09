@@ -7,21 +7,26 @@ public class Block : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float timeLength;
     [SerializeField] float fallDownSize;
+    [SerializeField] float timeDestory;
     [SerializeField] AnimationCurve curve;
     [SerializeField] Transform center;
     float elapsed = 0.0f;
+    public bool isOver = false;
 
     private void Update() 
     {
         if (GameManager.Instance.IsEnd) return;
         Rotation();
-        if (Input.GetKeyDown("space"))
+/*         if (Input.GetKeyDown("space"))
+        {
+            isOver =true;
             DestoryBlock();
+        } */
     }
 
     private void Rotation()
     {
-        if (gameObject == null)
+        if (isOver)
             return;
         if (elapsed < timeLength)
         {
@@ -43,11 +48,11 @@ public class Block : MonoBehaviour
         var time = 0.0f;
         Vector3 downPos = transform.position - new Vector3(0, fallDownSize, 0);
         Debug.Log(downPos);
-        while (time <= 1)
+        while (time < timeDestory)
         {
             yield return null;
-            transform.position = Vector3.Lerp(transform.position, downPos, time / 1);
- 
+
+            transform.position = Vector3.Lerp(transform.position, downPos, time / timeDestory);
             time += Time.deltaTime;
         }
         gameObject.SetActive(false);

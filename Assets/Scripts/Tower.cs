@@ -10,6 +10,7 @@ public class Tower : CustomBehaviour
     [SerializeField] Chest _chest = null;
     [SerializeField] Gem _gem = null;
     [SerializeField] Pie[] _pies = null;
+    [SerializeField] Block[] _blocks = null;
     Combine[] _combines;
     int _currentHight = 0;
     public override void Init()
@@ -28,6 +29,9 @@ public class Tower : CustomBehaviour
     {
         StartCoroutine(GoDownCo());
         GameManager.Instance.ShowFeedBack();
+        _currentHight--;
+        if (_currentHight <= 0)
+            DestoryBlock();
     }
     IEnumerator GoDownCo()
     {
@@ -49,5 +53,14 @@ public class Tower : CustomBehaviour
     public void CrashGem()
     {
         _gem.RewardParticle();
+    }
+
+    void DestoryBlock()
+    {
+        for (int i = 0; i < _blocks.Length; i++)
+        {
+            _blocks[i].DestoryBlock();
+            _blocks[i].isOver = true;
+        }
     }
 }
