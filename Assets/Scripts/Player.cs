@@ -74,6 +74,7 @@ public class Player : CustomBehaviour
     // Update is called once per frame
     void Update()
     {
+        //transform.localRotation = Quaternion.Euler(UnityEngine.Random.insideUnitSphere);
         if (GameManager.Instance.IsEnd) return;
         if (GameManager.Instance.IsWin || GameManager.Instance.IsCamMove)
         {
