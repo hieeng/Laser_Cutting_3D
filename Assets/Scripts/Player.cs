@@ -131,7 +131,7 @@ public class Player : CustomBehaviour
             var cutPiece = 1;
             if (!pie.CutOff(out cutPiece)) 
             {
-                HideParticle();
+                Invoke(nameof(HideParticle), 0.2f);
                 return;
             }
             GameManager.Instance.ScoreUp();
@@ -143,7 +143,8 @@ public class Player : CustomBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             _laser.gameObject.SetActive(false);
-            HideParticle();
+            var main = _particle.main;
+            main.loop = false;
         }
     }
 
@@ -164,6 +165,8 @@ public class Player : CustomBehaviour
 
     void ShowParticle(Material material, Vector3 pos)
     {
+        var main = _particle.main;
+        main.loop = true;
         _particleRenderer.material = material;
         _particle.transform.position = pos;
         _particle.gameObject.SetActive(true);
