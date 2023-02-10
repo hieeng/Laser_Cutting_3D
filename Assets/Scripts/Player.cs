@@ -127,14 +127,15 @@ public class Player : CustomBehaviour
             }
             //ChangeScale(hit);
             Pie pie = hit.collider.gameObject.GetComponent<Pie>();
-            if (!pie.CutOff()) 
+            var cutPiece = 1;
+            if (!pie.CutOff(out cutPiece)) 
             {
                 HideParticle();
                 return;
             }
             GameManager.Instance.ScoreUp();
             ShowParticle(pie.Mat, hit.point);
-            _rotY = 360.0f/100 * pie.CutPiece;
+            _rotY = 360.0f/100 * cutPiece;
             _doRotateTower?.Invoke(_rotY);
             _shootStart = Time.time;
         }

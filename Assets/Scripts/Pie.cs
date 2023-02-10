@@ -30,18 +30,24 @@ public class Pie : MonoBehaviour
         
     }
 
-    public bool CutOff()
+    public bool CutOff(out int cutPiece)
     {
+        cutPiece = _cutPiece;
         if (_combine.Count <= 0) 
         {
             gameObject.SetActive(false);
             _doDown?.Invoke();
+            cutPiece = 0;
             return false;
         }
         Debug.Log("cut");
         for (int i = 0; i < _cutPiece; i++)
         {
-            if (_combine.Count <= 0) break;
+            if (_combine.Count <= 0) 
+            {
+                cutPiece = i;
+                break;
+            }
             _combine.RemoveAt(_combine.Count - 1);
         }
         _cb.Bake();
