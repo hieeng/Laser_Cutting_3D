@@ -204,6 +204,7 @@ public class Player : CustomBehaviour
 
     void InterActionChest()
     {
+         _pointer.SetActive(false);
         _doOpenChest?.Invoke();
     }
 

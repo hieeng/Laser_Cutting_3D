@@ -23,6 +23,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject[] session;
     [SerializeField] GameObject[] clearSession;
     [SerializeField] Button _nextLevelBtn;
+
+    int prevFeedbackIdx = -1;
+
     public GameObject StartPanel
     {
         get => startPanel;
@@ -138,25 +141,42 @@ public class UIManager : MonoBehaviour
 
     public void ShowFeedBack()
     {
-        int rand = Random.Range(0, 3);
+        int rand = 0;
 
+        do
+        {
+            rand = Random.Range(0, 3);
+        } while(rand == prevFeedbackIdx);
+    
+        prevFeedbackIdx = rand;
+            
         FeedBackText[rand].SetActive(true);
-        StartCoroutine(CoroutineShowFeedBack(FeedBackText[rand]));
+        var text = FeedBackText[rand].GetComponent<Text>();
+        StartCoroutine(CoroutineShowFeedBack(text));
     }
 
-    IEnumerator CoroutineShowFeedBack(GameObject text)
+    IEnumerator CoroutineShowFeedBack(Text text)
     {
         var time = 0f;
+        var orgin = text.color;
 
         while (time <= Delaytime)
         {
-            time += Time.deltaTime;
-            text.transform.localScale = Vector3.one * time/Delaytime * 1.5f;
-
             yield return null;
+            time += Time.deltaTime;
         }
         time = 0;
-        text.SetActive(false);
+        while (time <= Delaytime)
+        {
+            yield return null;
+            time += Time.deltaTime;
+
+            var textColor = text.color;
+            textColor.a  = Mathf.Lerp(orgin.a, 0, time / Delaytime);
+            text.color = textColor;
+        }
+        text.color = orgin;
+        text.gameObject.SetActive(false);
     }
 
     public void ShowCurrentSession()
