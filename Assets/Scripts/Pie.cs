@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class Pie : MonoBehaviour
 {
+    [SerializeField] int _cutPiece = 1;
     public List<CombineInstance> _combine {get; set;}
     Combine _cb;
     Material _mat;
     public Material Mat {get => _mat;}
+    public int CutPiece{get => _cutPiece;}
     Action _doDown;
     public event Action DoDown
     {
@@ -37,7 +39,11 @@ public class Pie : MonoBehaviour
             return false;
         }
         Debug.Log("cut");
-        _combine.RemoveAt(_combine.Count - 1);
+        for (int i = 0; i < _cutPiece; i++)
+        {
+            if (_combine.Count <= 0) break;
+            _combine.RemoveAt(_combine.Count - 1);
+        }
         _cb.Bake();
         return true;
     }

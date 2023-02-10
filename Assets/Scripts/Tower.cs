@@ -21,7 +21,7 @@ public class Tower : CustomBehaviour
             _combines[i].Init();
             _pies[i].DoDown += GoDown;
         }
-        transform.localRotation = Quaternion.Euler(0, -90.0f, 0);
+        transform.localRotation = Quaternion.Euler(0, 360.0f/100, 0);
         _currentHight = _pies.Length;
     }
 
