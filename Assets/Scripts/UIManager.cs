@@ -166,6 +166,6 @@ public class UIManager : MonoBehaviour
 
     public void ShowClearSession(int value)
     {
-        clearSession[value].SetActive(true);
+        clearSession[GameManager.Instance.CurrentSession - value].SetActive(true);
     }
 }

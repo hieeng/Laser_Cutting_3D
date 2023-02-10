@@ -30,6 +30,8 @@ public class Tower : CustomBehaviour
         StartCoroutine(GoDownCo());
         GameManager.Instance.ShowFeedBack();
         _currentHight--;
+        if (_currentHight == 5)
+            AddBlock(_blocks.Length);
         if (_currentHight <= 0)
             DestoryBlock();
     }
@@ -53,6 +55,11 @@ public class Tower : CustomBehaviour
     public void CrashGem()
     {
         _gem.RewardParticle();
+    }
+
+    void AddBlock(int block)
+    {
+        _blocks[block - 1].AddBlock();
     }
 
     void DestoryBlock()
