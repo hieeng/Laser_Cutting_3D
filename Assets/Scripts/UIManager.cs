@@ -22,10 +22,21 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] GameObject[] session;
     [SerializeField] GameObject[] clearSession;
+    [SerializeField] Button _nextLevelBtn;
     public GameObject StartPanel
     {
         get => startPanel;
     }
+
+    public void Init()
+    {
+        _nextLevelBtn.onClick.AddListener(NextLevel);
+    }
+    void NextLevel()
+    {
+        SceneManager.LoadScene("SampleScene");
+    }
+    //SceneManager.LoadScene("Chewy");
     //패널
     public void OnStartPanel()
     {
@@ -64,6 +75,7 @@ public class UIManager : MonoBehaviour
 
     public void OnLosePanel()
     {
+        OffInGamePanel();
         SetLoseScoreText();
         losePanel.SetActive(true);
     }
@@ -84,7 +96,7 @@ public class UIManager : MonoBehaviour
     public void ReStartButton()
     {
         OffLosePanel();
-        SceneManager.LoadScene("Chewy");
+        SceneManager.LoadScene("SampleScene");
     }
 
     public void ADButton()

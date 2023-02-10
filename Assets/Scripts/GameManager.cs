@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
         _player.DoOpenChest += DoOpenChest;
         _player.DoCrashGem += DoCrashGem;
         _player.Init();
+        _uiManager.Init();
         _uiManager.SetGemText(Gem);
         _uiManager.OnStartPanel();
         for (int i = 0; i < _towers.Length; i++)
