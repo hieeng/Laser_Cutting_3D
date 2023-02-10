@@ -1,3 +1,4 @@
+// 츄이
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -52,6 +53,7 @@ public class GameManager : MonoBehaviour
         _uiManager.ShowCurrentSession();
         //...
     }
+    // 지오
     public int GetCurrentStageLevel()
     {
         return _stageManager.stage;
@@ -75,6 +77,7 @@ public class GameManager : MonoBehaviour
         _uiManager.OnInGamePanel();
     }
 
+    // 지오
     public void ShowFeedBack()
     {
         _uiManager.ShowFeedBack();
@@ -135,7 +138,7 @@ public class GameManager : MonoBehaviour
         }
         _uiManager.OnWinPanel();
     }
-
+    // 지오
     public void ScoreUp()
     {
         Score++;

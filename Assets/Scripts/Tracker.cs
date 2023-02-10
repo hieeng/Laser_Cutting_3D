@@ -1,3 +1,4 @@
+// 페일
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,13 +20,6 @@ public class Tracker : MonoBehaviour
     [SerializeField] Transform[] _startPos;
     
     [SerializeField] float _camMoveTime = 0.5f;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     public void NextSession(Action move)
     {
@@ -67,6 +61,7 @@ public class Tracker : MonoBehaviour
         _camera.localPosition = position;
     }
 
+    // 츄이
     IEnumerator MoveNextSessionCo(Action move)
     {
         var next = _startPos[GameManager.Instance.CurrentSession].position + _offset;

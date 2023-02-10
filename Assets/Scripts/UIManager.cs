@@ -1,3 +1,4 @@
+// 지오
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,16 +32,17 @@ public class UIManager : MonoBehaviour
         get => startPanel;
     }
 
+    // 츄이
     public void Init()
     {
         _nextLevelBtn.onClick.AddListener(NextLevel);
     }
+    // 츄이
     void NextLevel()
     {
         SceneManager.LoadScene("SampleScene");
     }
-    //SceneManager.LoadScene("Chewy");
-    //패널
+    
     public void OnStartPanel()
     {
         startPanel.SetActive(true);
@@ -179,11 +181,12 @@ public class UIManager : MonoBehaviour
         text.gameObject.SetActive(false);
     }
 
+    // 츄이
     public void ShowCurrentSession()
     {
         session[GameManager.Instance.CurrentSession].SetActive(true);
     }
-
+    // 츄이
     public void ShowClearSession(int value)
     {
         clearSession[GameManager.Instance.CurrentSession - value].SetActive(true);

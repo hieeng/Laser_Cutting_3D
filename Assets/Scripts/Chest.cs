@@ -1,3 +1,4 @@
+// 지오
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,13 +27,6 @@ public class Chest : MonoBehaviour
     {
         anim = GetComponent<Animator>();
     }
-
-    private void Update() 
-    {
-        //Open();
-        //Shake();
-    }
-
     public void Open(Action doWin)
     {
         currentTime += Time.deltaTime;
@@ -57,6 +51,7 @@ public class Chest : MonoBehaviour
         transform.localPosition = shakePostion * shakeAmount + originPos;
     }
 
+    //츄이
     public void OpenChest(Action doWin)
     {
         Open(doWin);

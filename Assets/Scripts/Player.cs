@@ -1,3 +1,4 @@
+// 츄이
 using System.Dynamic;
 using System;
 using System.Collections;
@@ -65,12 +66,6 @@ public class Player : CustomBehaviour
         remove => _doCrashGem -=value;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -97,11 +92,9 @@ public class Player : CustomBehaviour
         _laserParitcle = _laser.GetComponentsInChildren<ParticleSystem>();
     }
 
-    
-
+    // 츄이, 지오
     void Shoot()
     {
-       
         if (Input.GetMouseButton(0))
         {
             _doStart?.Invoke();

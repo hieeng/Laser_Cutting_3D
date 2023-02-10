@@ -1,3 +1,4 @@
+//츄이 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,9 +38,4 @@ public class PieGenerator : MonoBehaviour
         transform.gameObject.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

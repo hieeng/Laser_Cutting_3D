@@ -1,3 +1,4 @@
+// 츄이
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,11 +9,6 @@ public class Combine : MonoBehaviour
     List<CombineInstance> _combine = new List<CombineInstance>();
     MeshFilter _meshFilter;
     public List<CombineInstance> CombineInst {get => _combine;}
-    // Start is called before the first frame update
-    void Start()
-    {
-       
-    }
 
     public void Bake()
     {

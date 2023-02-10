@@ -1,3 +1,4 @@
+// 츄이
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ public class Tower : CustomBehaviour
         _currentHight = _pies.Length;
     }
 
+    // 츄이, 지오
     void GoDown()
     {
         StartCoroutine(GoDownCo());
@@ -56,12 +58,12 @@ public class Tower : CustomBehaviour
     {
         _gem.RewardParticle();
     }
-
+    // 지오
     void AddBlock(int block)
     {
         _blocks[block - 1].AddBlock();
     }
-
+    // 지오
     void DestoryBlock()
     {
         for (int i = 0; i < _blocks.Length; i++)

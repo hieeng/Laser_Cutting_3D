@@ -1,3 +1,4 @@
+// 츄이
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,12 +23,6 @@ public class Pie : MonoBehaviour
     {
         _cb = GetComponent<Combine>();
         _mat = GetComponent<MeshRenderer>().sharedMaterial;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public bool CutOff(out int cutPiece)
