@@ -99,6 +99,8 @@ public class GameManager : MonoBehaviour
         int idx = _currentSession;
         _towers[idx].CrashGem();
         _currentSession++;
+        Gem += 1;
+        _uiManager.SetGemText(Gem);
         //카메라 애니메이션
         _player.MoveBackAni();
        StartCoroutine(NextSessionCo(_player.MoveAni));
@@ -114,11 +116,14 @@ public class GameManager : MonoBehaviour
         }
         _tracker.NextSession(move);
         _uiManager.ShowCurrentSession();
-        _uiManager.ShowClearSession();
+        _uiManager.ShowClearSession(_currentSession - 1);
     }
 
     void DoWin()
     {
+        Gem += 8;
+        _uiManager.ShowClearSession(_currentSession);
+        _uiManager.SetGemText(Gem);
         StartCoroutine(DoWinCo());
     }
 
