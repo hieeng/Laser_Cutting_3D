@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public static int Gem{get; set;} = 0;
     public int Score{get; set;} = 0;
     private bool _isEnd = false;
-    public bool IsEnd{get => _isEnd;}
+    public bool IsEnd{get => _isEnd; set => _isEnd = value;}
     public bool IsWin{get; set;} = false;
     public bool IsCamMove{get; set;} = false;
     public int CurrentSession
@@ -57,15 +57,12 @@ public class GameManager : MonoBehaviour
     }
     void Lose()
     {
-        Gem += 10;
-        _uiManager.SetGemText(Gem);
         StartCoroutine(LoseCo());
     }
     IEnumerator LoseCo()
     {
         _isEnd = true;
-
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.8f);
         _uiManager.OnLosePanel();
     }
 

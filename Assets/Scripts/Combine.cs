@@ -23,6 +23,7 @@ public class Combine : MonoBehaviour
     {
         MeshFilter[] meshs = GetComponentsInChildren<MeshFilter>();
         _meshFilters.AddRange(meshs);
+        _meshFilters.RemoveAt(0);
         Debug.Log(_meshFilters.Count);
         int i = 0;
         while (i < _meshFilters.Count)
@@ -40,6 +41,7 @@ public class Combine : MonoBehaviour
         _meshFilter.mesh.CombineMeshes(_combine.ToArray());
         transform.gameObject.SetActive(true); 
         transform.gameObject.AddComponent<MeshCollider>();
+        transform.gameObject.GetComponent<MeshCollider>().convex = true;
         transform.gameObject.GetComponent<Pie>()._combine = _combine;
         //transform.localRotation = Quaternion.Euler(0, -90.0f, 0);
     }

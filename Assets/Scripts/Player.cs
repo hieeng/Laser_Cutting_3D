@@ -134,7 +134,7 @@ public class Player : CustomBehaviour
             }
             GameManager.Instance.ScoreUp();
             ShowParticle(pie.Mat, hit.point);
-            _rotY = 360.0f/101;
+            _rotY = 360.0f/100 * pie.CutPiece;
             _doRotateTower?.Invoke(_rotY);
             _shootStart = Time.time;
         }
@@ -174,18 +174,25 @@ public class Player : CustomBehaviour
 
     void InteractionBlock()
     {
-        _laserRenderer.startColor = _deadColor;
+        StartCoroutine(DeadCo());
+    }
+
+    IEnumerator DeadCo()
+    {
+        GameManager.Instance.IsEnd = true;
+        HideParticle();
+         _laserRenderer.startColor = _deadColor;
         _laserRenderer.endColor = _deadColor;
         for (int i = 0; i < _laserParitcle.Length; i++)
         {
             var main = _laserParitcle[i].main;
             main.startColor = _deadColor;
         }
+        yield return new WaitForSeconds(0.5f);
         gameObject.SetActive(false);
         _deadParticle.transform.position = transform.position;
         _deadParticle.gameObject.SetActive(true);
         _doEnd?.Invoke();
-        //TODO : GameOver넣어야함
     }
 
     void InterActionChest()
