@@ -7,6 +7,8 @@ public class Block : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float timeLength;
     [SerializeField] float fallDownSize;
+    [SerializeField] Vector3 ScaleAdd;
+    [SerializeField] float timeAdd;
     [SerializeField] float timeDestory;
     [SerializeField] AnimationCurve curve;
     [SerializeField] Transform center;
@@ -38,6 +40,25 @@ public class Block : MonoBehaviour
             elapsed = 0;
     }
 
+    public void AddBlock()
+    {
+        gameObject.SetActive(true);
+        StartCoroutine(CoruotineAddBlock());
+    }
+
+    IEnumerator CoruotineAddBlock()
+    {
+        var time = 0.0f;
+
+        while (time < timeAdd)
+        {
+            yield return null;
+
+            transform.localScale = Vector3.Lerp(transform.localScale, ScaleAdd, time/timeAdd);
+            time += Time.deltaTime;
+        }
+    }
+
     public void DestoryBlock()
     {
         StartCoroutine(CoroutineDestoryBlock());
@@ -46,13 +67,12 @@ public class Block : MonoBehaviour
     IEnumerator CoroutineDestoryBlock()
     {
         var time = 0.0f;
-        Vector3 downPos = transform.position - new Vector3(0, fallDownSize, 0);
-        Debug.Log(downPos);
+
         while (time < timeDestory)
         {
             yield return null;
 
-            transform.position = Vector3.Lerp(transform.position, downPos, time / timeDestory);
+            transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, time/timeDestory);
             time += Time.deltaTime;
         }
         gameObject.SetActive(false);
